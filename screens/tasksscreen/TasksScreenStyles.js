@@ -1,3 +1,4 @@
+import { StyleSheet, Platform } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
@@ -80,3 +81,5 @@ const styles = StyleSheet.create({
     },
   });
   
+
+export default styles;

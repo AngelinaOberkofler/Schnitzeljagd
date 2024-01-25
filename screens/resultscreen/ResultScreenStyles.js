@@ -1,3 +1,5 @@
+import { StyleSheet, Platform } from 'react-native';
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -45,3 +47,5 @@ const styles = StyleSheet.create({
       marginVertical: 20,
     },
   });
+
+export default styles;

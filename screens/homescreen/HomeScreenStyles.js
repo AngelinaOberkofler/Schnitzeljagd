@@ -1,12 +1,14 @@
+import { StyleSheet, Platform } from 'react-native';
+
 const styles = StyleSheet.create({
     container: {
-    flex: 1,
-    backgroundColor: '#FDD5CD',
-    },
+        flex: 1,
+        backgroundColor: '#014b7c',
+      },
+
     image: {
     width: '100%',
-    height: '40%',
-    marginTop: 150,
+    height: '60%',
     },
     contentContainer: {
     flex: 1,
@@ -20,7 +22,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#61dafb',
     fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'System',
-    marginTop: "-30%",
+    marginTop: '-30%',
     textShadowColor: 'black',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 5,
@@ -49,3 +51,5 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'System',
     },
     });
+
+    export default styles;

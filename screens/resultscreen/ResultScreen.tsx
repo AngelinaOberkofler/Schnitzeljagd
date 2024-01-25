@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, Platform } from 'react-native';
+import styles from './ResultScreenStyles';
 
 const ResultScreen: React.FC = ({ route }: any) => {
   const { result } = route.params;

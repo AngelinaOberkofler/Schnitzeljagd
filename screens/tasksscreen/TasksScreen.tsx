@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Platform, Modal } from 'react-native';
+import styles from './TasksScreenStyles';
 
 const TasksScreen: React.FC = ({ navigation }: any) => {
   const [isFinishModalVisible, setFinishModalVisible] = useState(false);
