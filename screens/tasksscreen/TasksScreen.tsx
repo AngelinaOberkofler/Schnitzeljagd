@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Platform, Modal, ScrollView } from 'react-native';
 import styles from './TasksScreenStyles';
+import { Ionicons } from '@expo/vector-icons'; 
+
 
 const TasksScreen: React.FC = ({ navigation }: any) => {
   const [isFinishModalVisible, setFinishModalVisible] = useState(false);
@@ -25,10 +27,17 @@ const TasksScreen: React.FC = ({ navigation }: any) => {
     setFinishModalVisible(false);
   };
 
+
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tasks Screen</Text>
-      
+      <View style={styles.titleContainer}>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+          <Ionicons name="arrow-back" size={24} color="#fff" />
+        </TouchableOpacity>
+      <Text style={styles.title}>Tasks</Text>
+      </View>
+      <ScrollView style={styles.scrollView} stickyHeaderIndices={[0]}>
       <TouchableOpacity style={styles.taskButton} onPress={() => handleTaskPress('Task1')}>
         <Text style={styles.taskButtonText}>Task 1</Text>
       </TouchableOpacity>
@@ -37,10 +46,27 @@ const TasksScreen: React.FC = ({ navigation }: any) => {
         <Text style={styles.taskButtonText}>Task 2</Text>
       </TouchableOpacity>
 
+      <TouchableOpacity style={styles.taskButton} onPress={() => handleTaskPress('Task3')}>
+        <Text style={styles.taskButtonText}>Task 3</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.taskButton} onPress={() => handleTaskPress('Task4')}>
+        <Text style={styles.taskButtonText}>Task 4</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.taskButton} onPress={() => handleTaskPress('Task5')}>
+        <Text style={styles.taskButtonText}>Task 5</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.taskButton} onPress={() => handleTaskPress('Task6')}>
+        <Text style={styles.taskButtonText}>Task 6</Text>
+      </TouchableOpacity>
+
+    </ScrollView>
       <TouchableOpacity style={styles.finishButton} onPress={handleFinishPress}>
         <Text style={styles.finishButtonText}>Finish</Text>
       </TouchableOpacity>
-
+    
       <Modal
         visible={isFinishModalVisible}
         animationType="slide"
