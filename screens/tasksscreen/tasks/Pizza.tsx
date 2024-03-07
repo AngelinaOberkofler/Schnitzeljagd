@@ -16,9 +16,10 @@ const Pizza: React.FC = () => {
   const [isCorrect, setIsCorrect] = useState(false);
 
   const checkAnswer = () => {
-    const correctAnswer = "3.10";
+    const correctAnswer = "3,10";
+    const correctAnswer2 = "3.10";
     const isCorrect =
-      answer.trim().toLowerCase() === correctAnswer.toLowerCase();
+      answer.trim().toLowerCase() === correctAnswer.toLowerCase() || answer.trim().toLowerCase() === correctAnswer2.toLowerCase();
     setIsCorrect(isCorrect);
   };
 
