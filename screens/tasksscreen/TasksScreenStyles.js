@@ -95,6 +95,55 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'System',
   },
+  questionText: {
+    textAlign: 'center',
+    fontSize: 18,
+    marginBottom: 20,
+    textAlign: 'center',
+    fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'System',
+    color: '#ECF0F1',
+  },
+  questionTextSub: {
+    textAlign: 'center',
+    fontSize: 15,
+    textAlign: 'center',
+    fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'System',
+    color: '#BCBCBC',
+  },
+  textInput: {
+    backgroundColor: '#fff',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 4,
+    marginVertical: 8,
+    fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'System',
+  },
+  radioGroup: { 
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    justifyContent: 'space-around', 
+    marginTop: 20, 
+    borderRadius: 8, 
+    backgroundColor: 'white', 
+    padding: 16, 
+    elevation: 4, 
+    shadowColor: '#000', 
+    shadowOffset: { 
+        width: 0, 
+        height: 2, 
+    }, 
+    shadowOpacity: 0.25, 
+    shadowRadius: 3.84, 
+}, 
+radioButton: { 
+    flexDirection: 'row', 
+    alignItems: 'center', 
+}, 
+radioLabel: { 
+    marginLeft: 8, 
+    fontSize: 16, 
+    color: '#333', 
+},
 });
 
 export default styles;

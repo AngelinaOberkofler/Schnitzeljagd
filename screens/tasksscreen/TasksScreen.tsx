@@ -1,14 +1,39 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Platform, Modal, ScrollView } from 'react-native';
-import styles from './TasksScreenStyles';
-import { Ionicons } from '@expo/vector-icons'; 
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Platform,
+  Modal,
+  ScrollView,
+} from "react-native";
+import styles from "./TasksScreenStyles";
+import { Ionicons } from "@expo/vector-icons";
+import * as AllTasks from "./tasks/AllTasks";
 
+const tasks = Object.keys(AllTasks);
 
 const TasksScreen: React.FC = ({ navigation }: any) => {
+  const taskAmount = 6;
   const [isFinishModalVisible, setFinishModalVisible] = useState(false);
+  const [randomTasks, setRandomTasks] = useState<string[]>([]);
+
+  useEffect(() => {
+    const shuffledTasks = shuffleArray(tasks).slice(0, taskAmount);
+    setRandomTasks(shuffledTasks);
+  }, []);
+
+  const shuffleArray = (array: any[]) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
 
   const handleTaskPress = (taskName: string) => {
-    navigation.navigate('TaskDetails', { taskName });
+    navigation.navigate("TaskDetails", { taskName });
   };
 
   const handleFinishPress = () => {
@@ -18,8 +43,8 @@ const TasksScreen: React.FC = ({ navigation }: any) => {
   const handleConfirmFinish = () => {
     // Missing logic for confirmation
 
-    const result = 'won';  // change later
-    navigation.navigate('ResultScreen', { result });
+    const result = "won"; // change later
+    navigation.navigate("ResultScreen", { result });
     setFinishModalVisible(false);
   };
 
@@ -27,46 +52,31 @@ const TasksScreen: React.FC = ({ navigation }: any) => {
     setFinishModalVisible(false);
   };
 
-
-
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
           <Ionicons name="arrow-back" size={24} color="#fff" />
         </TouchableOpacity>
-      <Text style={styles.title}>Tasks</Text>
+        <Text style={styles.title}>Tasks</Text>
       </View>
       <ScrollView style={styles.scrollView} stickyHeaderIndices={[0]}>
-      <TouchableOpacity style={styles.taskButton} onPress={() => handleTaskPress('Task1')}>
-        <Text style={styles.taskButtonText}>Task 1</Text>
-      </TouchableOpacity>
-      
-      <TouchableOpacity style={styles.taskButton} onPress={() => handleTaskPress('Task2')}>
-        <Text style={styles.taskButtonText}>Task 2</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.taskButton} onPress={() => handleTaskPress('Task3')}>
-        <Text style={styles.taskButtonText}>Task 3</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.taskButton} onPress={() => handleTaskPress('Task4')}>
-        <Text style={styles.taskButtonText}>Task 4</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.taskButton} onPress={() => handleTaskPress('Task5')}>
-        <Text style={styles.taskButtonText}>Task 5</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.taskButton} onPress={() => handleTaskPress('Task6')}>
-        <Text style={styles.taskButtonText}>Task 6</Text>
-      </TouchableOpacity>
-
-    </ScrollView>
+        {randomTasks.map((task) => (
+          <TouchableOpacity
+            style={styles.taskButton}
+            onPress={() => handleTaskPress(task)}
+          >
+            <Text style={styles.taskButtonText}>{task}</Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
       <TouchableOpacity style={styles.finishButton} onPress={handleFinishPress}>
         <Text style={styles.finishButtonText}>Finish</Text>
       </TouchableOpacity>
-    
+
       <Modal
         visible={isFinishModalVisible}
         animationType="slide"
@@ -74,13 +84,21 @@ const TasksScreen: React.FC = ({ navigation }: any) => {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalText}>Are you sure you want to finish?</Text>
-            
-            <TouchableOpacity style={styles.modalButton} onPress={handleConfirmFinish}>
+            <Text style={styles.modalText}>
+              Are you sure you want to finish?
+            </Text>
+
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={handleConfirmFinish}
+            >
               <Text style={styles.modalButtonText}>Yes</Text>
             </TouchableOpacity>
-            
-            <TouchableOpacity style={styles.modalButton} onPress={handleCancelFinish}>
+
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={handleCancelFinish}
+            >
               <Text style={styles.modalButtonText}>No</Text>
             </TouchableOpacity>
           </View>
