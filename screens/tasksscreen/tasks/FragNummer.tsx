@@ -1,34 +1,23 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Platform,
-  Modal,
-  ScrollView,
-  TextInput,Image
-} from "react-native";
+import {View,Text,TouchableOpacity,StyleSheet,Platform,Modal,ScrollView,TextInput,Image} from "react-native";
 import styles from "../TasksScreenStyles";
 
-const Diplomarbeit: React.FC = () => {
+const FragNummer: React.FC = () => {
   const [answer, setAnswer] = useState("");
-  const [isCorrect, setIsCorrect] = useState(Boolean);
+  const [isCorrect, setIsCorrect] = useState(false);
 
   const checkAnswer = () => {
-    const correctAnswer = "Bibliothek";
-    const isCorrect =
-      answer.trim().toLowerCase() === correctAnswer.toLowerCase();
+    const isCorrect =answer.trim()!=="";
     setIsCorrect(isCorrect);
   };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.questionText}>
-        Wo findet man die Diplomarbeiten von Absolventen: <br />
+      Wer sitzt da hinten in der letzten Reihe?<br />
         <Text style={styles.questionTextSub}>
-          Suche nach einem Ort, an dem die Diplomarbeiten früherer Absolventen
-          aufbewahrt werden.
+        Finde heraus, wer in der letzten Reihe sitzt, und wenn die Person attraktiv ist, frage
+nach seiner oder ihrer Nummer 😉😉
         </Text>
       </Text>
       <Image
@@ -49,4 +38,4 @@ const Diplomarbeit: React.FC = () => {
   );
 };
 
-export default Diplomarbeit;
+export default FragNummer;

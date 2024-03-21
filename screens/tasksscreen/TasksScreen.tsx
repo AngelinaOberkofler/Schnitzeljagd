@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Platform,
-  Modal,
-  ScrollView,
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Platform, Modal, ScrollView, Image } from "react-native";
 import styles from "./TasksScreenStyles";
 import { Ionicons } from "@expo/vector-icons";
 import * as AllTasks from "./tasks/AllTasks";
 
 const tasks = Object.keys(AllTasks);
 
-const TasksScreen: React.FC = ({ navigation }: any) => {
-  const taskAmount = 6;
+const TasksScreen: React.FC = ({ route, navigation }: any) => {
+  const { playerName, avatarSource } = route.params;
+  const taskAmount = 8;
   const [isFinishModalVisible, setFinishModalVisible] = useState(false);
   const [randomTasks, setRandomTasks] = useState<string[]>([]);
 
@@ -54,12 +47,21 @@ const TasksScreen: React.FC = ({ navigation }: any) => {
 
   return (
     <View style={styles.container}>
+      <Image
+                source={require('../../pictures/back.jpg')}
+                style={styles.backgroundImage}
+                resizeMode="cover"
+            />
+      <View style={styles.playerInfo}>
+        <Image source={avatarSource} style={styles.avatar} resizeMode="cover" />
+        <Text style={styles.playerName}>{playerName}</Text>
+      </View>
       <View style={styles.titleContainer}>
         <TouchableOpacity
           style={styles.backButton}
           onPress={() => navigation.goBack()}
         >
-          <Ionicons name="arrow-back" size={24} color="#fff" />
+          <Ionicons name="arrow-back" size={24} color="#8A2BE2" />
         </TouchableOpacity>
         <Text style={styles.title}>Tasks</Text>
       </View>
