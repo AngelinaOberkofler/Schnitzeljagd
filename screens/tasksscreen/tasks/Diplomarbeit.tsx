@@ -32,7 +32,7 @@ const Diplomarbeit: React.FC = () => {
         </Text>
       </Text>
       <Image
-        source={require('../tasks/taskpics/justin.jpg')}
+        source={require('../tasks/taskpics/Diplomarbeit.png')}
         style={styles.teacherImage}
       />
       <TextInput
