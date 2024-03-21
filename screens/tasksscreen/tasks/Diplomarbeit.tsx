@@ -7,19 +7,26 @@ import {
   Platform,
   Modal,
   ScrollView,
-  TextInput,Image
+  TextInput,
+  Image,
+  Alert,
 } from "react-native";
-import styles from "../TasksScreenStyles";
+import styles from "../TasksScreenStyles"; 
 
-const Diplomarbeit: React.FC = () => {
+const Diplomarbeit: React.FC = ({ navigation }: any) => {
   const [answer, setAnswer] = useState("");
-  const [isCorrect, setIsCorrect] = useState(Boolean);
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [answerSubmitted, setAnswerSubmitted] = useState(false);
 
   const checkAnswer = () => {
     const correctAnswer = "Bibliothek";
     const isCorrect =
       answer.trim().toLowerCase() === correctAnswer.toLowerCase();
     setIsCorrect(isCorrect);
+    setAnswerSubmitted(true);
+    if (answerSubmitted) {
+      navigation.navigate("Tasks");
+    } 
   };
 
   return (
@@ -31,17 +38,19 @@ const Diplomarbeit: React.FC = () => {
           aufbewahrt werden.
         </Text>
       </Text>
-      <Image
-        source={require('../tasks/taskpics/Diplomarbeit.png')}
-        style={styles.teacherImage}
-      />
+      
       <TextInput
         style={styles.textInput}
         onChangeText={(text) => setAnswer(text)}
         value={answer}
         placeholder="Antwort eingeben"
+        editable={!answerSubmitted} 
       />
-      <TouchableOpacity style={styles.modalButton} onPress={checkAnswer}>
+      <TouchableOpacity
+        style={[styles.modalButton, { opacity: answerSubmitted ? 0.5 : 1 }]} 
+        onPress={checkAnswer}
+        disabled={answerSubmitted} 
+      >
         <Text style={styles.modalButtonText}>Antwort überprüfen</Text>
       </TouchableOpacity>
       {isCorrect && <Text style={styles.modalText}>Richtig!</Text>}

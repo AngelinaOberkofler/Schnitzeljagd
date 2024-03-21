@@ -16,8 +16,12 @@ const ErsteHilfe: React.FC = () => {
   const [isCorrect, setIsCorrect] = useState(Boolean);
 
   const checkAnswer = () => {
-    const correctAnswer = "";
-    const isCorrect = answer.trim().toLowerCase() === correctAnswer.toLowerCase();
+    const correctAnswer = "5BHIF";
+    const correctAnswer2 = "3BHME";
+    const correctAnswer3 = "3CHIF";
+    const isCorrect = answer.trim().toLowerCase() === correctAnswer.toLowerCase()
+                      || answer.trim().toLowerCase() === correctAnswer2.toLowerCase()
+                      || answer.trim().toLowerCase() === correctAnswer3.toLowerCase();
     setIsCorrect(isCorrect);
   };
 

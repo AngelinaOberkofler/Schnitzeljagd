@@ -26,7 +26,7 @@ const Pizza: React.FC = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.questionText}>
-        Finde heraus, wie viel ein Snickers im Buffet kostet.
+        Finde heraus, wie viel ein Stück Pizza im Buffet kostet.
       </Text>
       <TextInput
         style= {styles.textInput}
