@@ -24,7 +24,7 @@ const TaskDetails: React.FC = ({ navigation, route }: any) => {
           style={styles.backButton}
           onPress={() => navigation.goBack()}
         >
-          <Ionicons name="arrow-back" size={24} color="#fff" />
+          <Ionicons name="arrow-back" size={24} color="#8A2BE2" />
         </TouchableOpacity>
         <Text style={styles.title}>{taskName}</Text>
       </View>

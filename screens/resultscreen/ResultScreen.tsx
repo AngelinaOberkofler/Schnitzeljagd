@@ -5,11 +5,16 @@ import styles from './ResultScreenStyles';
 const ResultScreen: React.FC = ({ route }: any) => {
   const { result } = route.params;
 
-  const gottenPoints = 50; // Mock data
+  const gottenPoints = 100; // Mock data
   const totalPoints = 100; // Mock data
 
   return (
     <View style={styles.container}>
+      <Image
+                source={require('../../pictures/back.jpg')}
+                style={styles.backgroundImage}
+                resizeMode="cover"
+            />
       <Text style={styles.title}>Du hast</Text>
       <Text style={styles.points}>{gottenPoints} Punkte / {totalPoints} Punkte</Text>
       
@@ -21,7 +26,7 @@ const ResultScreen: React.FC = ({ route }: any) => {
       ) : (
         <View style={styles.loserContainer}>
           <Text style={styles.loserText}>LOSER</Text>
-          <Image source={require('../../pictures/loser.png')} style={styles.image} resizeMode="cover" />
+          <Image source={require('../../pictures/newloser.png')} style={styles.image} resizeMode="cover" />
         </View>
       )}
     </View>

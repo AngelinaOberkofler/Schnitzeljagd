@@ -1,42 +1,33 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Platform,
-  Modal,
-  ScrollView,
-  TextInput,Image
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Platform, Modal, ScrollView, TextInput, Image } from "react-native";
 import styles from "../TasksScreenStyles";
 
-const Diplomarbeit: React.FC = () => {
+const LehrerFoto: React.FC = () => {
   const [answer, setAnswer] = useState("");
-  const [isCorrect, setIsCorrect] = useState(Boolean);
+  const [isCorrect, setIsCorrect] = useState(false);
 
   const checkAnswer = () => {
-    const correctAnswer = "Bibliothek";
+    const correctAnswer = "Lukas Draxler";
+    const correctAnswer2 = "Draxler Lukas";
+    const correctAnswer3 = "Draxler";
     const isCorrect =
-      answer.trim().toLowerCase() === correctAnswer.toLowerCase();
+      answer.trim().toLowerCase() === correctAnswer.toLowerCase() || answer.trim().toLowerCase() === correctAnswer2.toLowerCase()|| answer.trim().toLowerCase() === correctAnswer3
+      .toLowerCase();
     setIsCorrect(isCorrect);
   };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.questionText}>
-        Wo findet man die Diplomarbeiten von Absolventen: <br />
-        <Text style={styles.questionTextSub}>
-          Suche nach einem Ort, an dem die Diplomarbeiten früherer Absolventen
-          aufbewahrt werden.
-        </Text>
+        Schau das Foto dieses Lehrers an und frag im Schulgebäude andere Mitmenschen, ob sie wissen, wer die Person auf dem Foto ist. Gebe seinen Namen unten ein:
       </Text>
       <Image
-        source={require('../tasks/taskpics/justin.jpg')}
+        source={require('../tasks/taskpics/draxler.jpg')}
         style={styles.teacherImage}
       />
       <TextInput
         style={styles.textInput}
+        keyboardType="numeric"
         onChangeText={(text) => setAnswer(text)}
         value={answer}
         placeholder="Antwort eingeben"
@@ -49,4 +40,4 @@ const Diplomarbeit: React.FC = () => {
   );
 };
 
-export default Diplomarbeit;
+export default LehrerFoto;

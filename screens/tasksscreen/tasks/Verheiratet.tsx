@@ -11,7 +11,6 @@ import {
 } from "react-native";
 import { RadioButton } from "react-native-paper";
 import styles from "../TasksScreenStyles";
-
 const Verheiratet: React.FC = () => {
   const [isCorrect, setIsCorrect] = useState(false);
   const [checked, setChecked] = useState<string>();
