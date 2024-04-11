@@ -196,7 +196,13 @@ teacherImage: {
   resizeMode: 'cover', // Adjust the resize mode as needed
   marginVertical: 10, // Adjust the vertical margin as needed
 },
+correctTaskButton: {
+  backgroundColor: 'green',
+},
 
+wrongTaskButton: {
+  backgroundColor: 'red',
+},
 });
 
 export default styles;

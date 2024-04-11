@@ -67,6 +67,33 @@ aboutButtonText: {
     fontSize: 16,
     fontWeight: 'bold', // Make the text bolder
 },
+modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+},
+modalContent: {
+    backgroundColor: '#FFF',
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+},
+modalText: {
+    fontSize: 18,
+    marginBottom: 10,
+},
+modalCloseButton: {
+    marginTop: 20,
+    padding: 10,
+    backgroundColor: '#800080',
+    borderRadius: 5,
+},
+modalCloseButtonText: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+},
 });
 
 export default styles;

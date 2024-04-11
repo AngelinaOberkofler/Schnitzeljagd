@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, Image, TextInput, Modal } from 'react-native'; // Import Modal component
 import { launchImageLibrary, ImageLibraryOptions, ImagePickerResponse } from 'react-native-image-picker';
 import styles from './HomeScreenStyles';
 
 const HomeScreen: React.FC = ({ navigation }: any) => {
     const [avatarSource, setAvatarSource] = useState<any>(require('../../pictures/defaultpfp.jpeg'));
     const [playerName, setPlayerName] = useState('');
+    const [showAboutUs, setShowAboutUs] = useState(false); // State to manage visibility of About Us window
 
     const handleStartPress = () => {
         navigation.navigate('Tasks', { playerName, avatarSource });
@@ -26,6 +27,10 @@ const HomeScreen: React.FC = ({ navigation }: any) => {
                 setAvatarSource(source);
             }
         });
+    };
+
+    const toggleAboutUs = () => {
+        setShowAboutUs(!showAboutUs);
     };
 
     return (
@@ -52,9 +57,28 @@ const HomeScreen: React.FC = ({ navigation }: any) => {
             <TouchableOpacity style={styles.button} onPress={handleStartPress}>
                 <Text style={styles.buttonText}>Start</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.aboutButton}>
+            <TouchableOpacity style={styles.aboutButton} onPress={toggleAboutUs}> {/* Call toggleAboutUs function onPress */}
                 <Text style={styles.aboutButtonText}>About Us</Text>
             </TouchableOpacity>
+
+            {/* Modal for About Us */}
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={showAboutUs}
+                onRequestClose={toggleAboutUs}
+            >
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalContent}>
+                        <Text style={styles.modalText}>Welcome to our project!</Text>
+                        <Text style={styles.modalText}>We are three girls from CHIF20.</Text>
+                        <Text style={styles.modalText}>This is our SYP project.</Text>
+                        <TouchableOpacity onPress={toggleAboutUs} style={styles.modalCloseButton}>
+                            <Text style={styles.modalCloseButtonText}>Close</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
         </View>
     );
 };
