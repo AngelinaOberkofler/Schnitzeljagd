@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Platform, Modal, ScrollView, Image } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Platform, Modal, ScrollView, Image, BackHandler } from "react-native";
 import styles from "./TasksScreenStyles";
 import { Ionicons } from "@expo/vector-icons";
 import * as AllTasks from "./tasks/AllTasks";
@@ -10,11 +10,26 @@ const TasksScreen: React.FC = ({ route, navigation }: any) => {
   const { playerName, avatarSource } = route.params;
   const taskAmount = 8;
   const [isFinishModalVisible, setFinishModalVisible] = useState(false);
+  const [isLeavingModalVisible, setLeavingModalVisible] = useState(false);
   const [randomTasks, setRandomTasks] = useState<string[]>([]);
 
   useEffect(() => {
     const shuffledTasks = shuffleArray(tasks).slice(0, taskAmount);
     setRandomTasks(shuffledTasks);
+  }, []);
+
+  useEffect(() => {
+    const backAction = () => {
+      setLeavingModalVisible(true);
+      return true; // Prevent default behavior (exit the app)
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
   }, []);
 
   const shuffleArray = (array: any[]) => {
@@ -34,8 +49,6 @@ const TasksScreen: React.FC = ({ route, navigation }: any) => {
   };
 
   const handleConfirmFinish = () => {
-    // Missing logic for confirmation
-
     const result = "won"; // change later
     navigation.navigate("ResultScreen", { result });
     setFinishModalVisible(false);
@@ -45,21 +58,34 @@ const TasksScreen: React.FC = ({ route, navigation }: any) => {
     setFinishModalVisible(false);
   };
 
+  const handleLeaveConfirmation = () => {
+    setLeavingModalVisible(false);
+    navigation.goBack();
+  };
+
+  const handleCancelLeave = () => {
+    setLeavingModalVisible(false);
+  };
+
   return (
     <View style={styles.container}>
       <Image
-                source={require('../../pictures/back.jpg')}
-                style={styles.backgroundImage}
-                resizeMode="cover"
-            />
+        source={require("../../pictures/back.jpg")}
+        style={styles.backgroundImage}
+        resizeMode="cover"
+      />
       <View style={styles.playerInfo}>
-        <Image source={avatarSource} style={styles.avatar} resizeMode="cover" />
+        <Image
+          source={avatarSource}
+          style={styles.avatar}
+          resizeMode="cover"
+        />
         <Text style={styles.playerName}>{playerName}</Text>
       </View>
       <View style={styles.titleContainer}>
         <TouchableOpacity
           style={styles.backButton}
-          onPress={() => navigation.goBack()}
+          onPress={() => setLeavingModalVisible(true)}
         >
           <Ionicons name="arrow-back" size={24} color="#8A2BE2" />
         </TouchableOpacity>
@@ -70,6 +96,7 @@ const TasksScreen: React.FC = ({ route, navigation }: any) => {
           <TouchableOpacity
             style={styles.taskButton}
             onPress={() => handleTaskPress(task)}
+            key={task}
           >
             <Text style={styles.taskButtonText}>{task}</Text>
           </TouchableOpacity>
@@ -100,6 +127,34 @@ const TasksScreen: React.FC = ({ route, navigation }: any) => {
             <TouchableOpacity
               style={styles.modalButton}
               onPress={handleCancelFinish}
+            >
+              <Text style={styles.modalButtonText}>No</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      <Modal
+        visible={isLeavingModalVisible}
+        animationType="slide"
+        transparent={true}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>
+              Are you sure you want to leave? Your progress won't be saved.
+            </Text>
+
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={handleLeaveConfirmation}
+            >
+              <Text style={styles.modalButtonText}>Yes</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={handleCancelLeave}
             >
               <Text style={styles.modalButtonText}>No</Text>
             </TouchableOpacity>
